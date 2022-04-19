@@ -26,7 +26,9 @@
 
 @endforeach
 
-
+    @empty($posts->count)
+            <div class=""><h3 class="text-center text-muted py-5">Follow your friends to see their posts</h3></div>
+    @endempty
 
 </div>
 <div class="row">

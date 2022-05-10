@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\post;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use App\Models\User;
 
 class postController extends Controller
 {
@@ -20,7 +21,9 @@ class postController extends Controller
 
         $posts = post::wherein('user_id',$following)->with('user')->latest()->paginate(5);
 
-        return view('posts.index', compact('posts'));
+        $suggested = User::whereHas('post')->limit(5)->get();
+
+        return view('posts.index', compact('posts','suggested'));
 
     }
 
@@ -54,4 +57,6 @@ class postController extends Controller
     public function show(\App\Models\post $post){
         return view('posts.show', compact('post'));
     }
+
+    
 }

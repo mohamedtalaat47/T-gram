@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 class profileController extends Controller
 {
 
-    public function index(\App\Models\user $user)
+    public function index(\App\Models\User $user)
     {
 
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
@@ -18,7 +18,7 @@ class profileController extends Controller
         return view('profile.index',compact('user','follows'));
     }
 
-    public function edit(\App\Models\user $user){
+    public function edit(\App\Models\User $user){
 
         $this->authorize('update',$user->profile);
 
@@ -26,7 +26,7 @@ class profileController extends Controller
 
     }
 
-    public function update(\App\Models\user $user){
+    public function update(\App\Models\User $user){
 
         $this->authorize('update',$user->profile);
 
@@ -55,4 +55,6 @@ class profileController extends Controller
 
         return redirect("/profile/{$user->id}");
     }
+
+    
 }
